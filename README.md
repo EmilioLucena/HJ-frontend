@@ -4,7 +4,7 @@ Before anything, you must run
 
 ## `npm install`
 
-in order to install node dependencies
+in order to install node dependencies. Also, remember to edit src/services/url.js and set the backend API accordingly.
 
 ## Available Scripts
 
