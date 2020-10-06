@@ -28,7 +28,7 @@ export default function Journey({ journey }) {
       <JourneyHeader id={journey.id} title={journey.name} />
       <div className="Journey">
         {journeyStages.map((stage) => (
-          <StageCard stage={stage} />
+          <StageCard stage={stage} key={stage.id} />
         ))}
       </div>
     </>

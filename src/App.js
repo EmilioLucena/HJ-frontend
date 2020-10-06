@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
-
 import { DropdownButton, Dropdown, Image } from "react-bootstrap";
 import Journey from "./components/Journey";
 
-// hook used to call the API
-// import useAPI from "./hooks/useAPI";
+import "./App.css";
 
 // this is how we get data from the API
 import getData from "./services/useAPI";
-
-// URL for the main journeys endpoint
-const apiURL = "http://127.0.0.1:8080/journeys";
+import API_URL from "./services/url";
 
 //journey main logo
 const logoURL = "logo.png";
+
+const mainEndpoint = API_URL + "/journeys";
 
 function App() {
   const [journeys, setJourneys] = useState([]);
@@ -23,8 +20,7 @@ function App() {
   useEffect(() => {
     const loadJourneys = async () => {
       try {
-        const res = await getData(apiURL);
-        console.log(res);
+        const res = await getData(mainEndpoint);
         setJourneys(res);
       } catch (err) {
         console.log(err);
@@ -49,16 +45,15 @@ function App() {
 
   return (
     <div className="App">
-      <div className="App-Header">
-        <Image src={logoURL} className="App-Logo" />
-        <DropdownButton
-          variant="secondary"
-          size="lg"
-          title="Select Your Journey"
-        >
-          {dropDownItems}
-        </DropdownButton>
-      </div>
+      <DropdownButton
+        style={{ alignSelf: "flex-start", padding: "5px" }}
+        variant="secondary"
+        size="md"
+        title="Select Your Journey"
+      >
+        {dropDownItems}
+      </DropdownButton>
+      <Image src={logoURL} className="App-Logo" />
       {selectedJourney !== null && (
         <Journey journey={journeys[selectedJourney]} />
       )}
